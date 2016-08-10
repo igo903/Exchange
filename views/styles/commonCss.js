@@ -12,11 +12,22 @@ var appCSS = StyleSheet.create({
     col:{flexDirection:'column'},
 
     topNavBar:{
-        flex:1
+        flex:1,
+        height:64,
+        backgroundColor:topNavBarBg,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+
+    leftNavButtonText:{
+        color:'#fff'
+    },
+    rightNavButtonText:{
+        color:'#fff'
     },
 
     headerMarginTop:{
-        marginTop:64
+        marginTop:44
     },
 
     center:{
@@ -26,6 +37,10 @@ var appCSS = StyleSheet.create({
     },
 
     title:{
+        color:"#fff",
+        fontSize:18,
+        marginTop:12,
+        fontWeight: 'bold',
         justifyContent:"center",
         alignItems:"center"
     },

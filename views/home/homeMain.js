@@ -29,7 +29,7 @@ class HomeMain extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-	      titleText: "Bird's HomeMain",
+	      titleText: "Bird",
 	      bodyText: 'This is not really a bird nest.'
 	    };
 	}
@@ -41,9 +41,20 @@ class HomeMain extends React.Component{
         })
 	}
 
+
+	_navigate(code,name) {
+		this.props.navigator.push({
+			passProps: {
+				name: name
+			},
+			type:'FloatFromBottom'
+		})
+	}
+
 	render(){
 		return (
-			<ScrollView style={[css.appBg]}>
+			<ScrollView style={[css.appBg, css.headerMarginTop]}>
+
 			<View >
 				<Swiper height={180} showsButtons={false} autoplay = {true}>
 					<View style={css.flex}>
@@ -66,7 +77,7 @@ class HomeMain extends React.Component{
 
 				<View style={[css.row,css.iconPortArea]}>
 					<View style={css.center}>
-						<TouchableOpacity onPress={this.iconPortGoTo.bind(this,"msgCenter","消息中心")}>
+						<TouchableOpacity onPress={() => this._navigate('msgCenter','消息中心')}>
 							<Image source = {require("image!msg_icon")} style={css.iconPort}></Image>
 						</TouchableOpacity>
 						<Text style={css.portTxt}>消息中心</Text>
@@ -109,9 +120,7 @@ class HomeMain extends React.Component{
 							<Image source={require('./../../img/a2.png')}  style={css.promoCellImg} ></Image>
 						</View>
 
-
 					</View>
-
 				</View>
 
 

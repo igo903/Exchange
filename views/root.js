@@ -7,6 +7,7 @@ import {
   View,
   ScrollView,
   Image,
+  TouchableHighlight,
   TabBarIOS,
   NavigatorIOS,
   Navigator
@@ -21,17 +22,48 @@ var MyCenter = require('./my/myCenter');
 
 var css = require('./styles/commonCss');
 
+
+var NavigationBarRouteMapper = {
+    LeftButton(route, navigator, index, navState) {
+        console.log(index)
+        if(index > 0) {
+            return (
+                <TouchableHighlight
+                    underlayColor="transparent"
+                    onPress={() => { if (index > 0) { navigator.pop() } }}>
+                    <Text style={ css.leftNavButtonText }>Back</Text>
+                </TouchableHighlight>)
+        }
+        else { return null }
+    },
+    RightButton(route, navigator, index, navState) {
+        if (route.onPress) return (
+            <TouchableHighlight
+                onPress={ () => route.onPress() }>
+                <Text style={ css.rightNavButtonText }>
+              { route.rightText || 'Right Button' }
+                </Text>
+            </TouchableHighlight>)
+    },
+    Title(route, navigator, index, navState) {
+        if(index == 0){
+            return <Text style={ css.title }>{route.title}</Text>
+        }
+
+    }
+};
+
+
 class Root extends React.Component {
   constructor(props) {
     super(props);
     this.state = {title: ''}
   }
 
-    select(tabCode,tabName) {
-        this.setState({
-            tab:tabCode,
-            title:tabName
-        })
+    renderScene(route, navigator) {
+        if(route.name == 'TabBarFooter') {
+            return <TabBarFooter navigator={navigator} {...route.passProps}  />
+        }
     }
 
 
@@ -41,23 +73,31 @@ class Root extends React.Component {
       <View style={css.flex}>
           <StatusBar
               backgroundColor="red"
-              barStyle="light-content"
+              barStyle="default"
           />
-      <NavigatorIOS barTintColor = "#1B2128"
-        initialRoute={{
-          component: HomeIndex,
-          titleTextColor: "#fff",
-          title:'kkk'
-        }}
-        style={css.flex}
-      />
+          <Navigator
+              style={[css.flex]}
+              initialRoute={{ title: '数据权益', index: 0, name:'TabBarFooter' }}
+              //renderScene={(route, navigator) => <TabBarFooter></TabBarFooter>}
+              renderScene={this.renderScene}
+
+              //navigationBar={
+              //    <Navigator.NavigationBar
+              //        routeMapper={ NavigationBarRouteMapper }
+              //        style={[css.topNavBar]}
+              //    />
+              //    }
+
+
+          />
+
       </View>
     );
   }
 };
 
 
-class HomeIndex extends React.Component {
+class TabBarFooter extends React.Component {
 
   constructor(props) {
     super(props);
