@@ -73,7 +73,7 @@ class Root extends React.Component {
       <View style={css.flex}>
           <StatusBar
               backgroundColor="red"
-              barStyle="default"
+              barStyle="light-content"
           />
           <Navigator
               style={[css.flex]}
@@ -110,6 +110,7 @@ class TabBarFooter extends React.Component {
         tab:tabCode,
         title:tabName
     })
+      console.log(tabName)
   }
 
 

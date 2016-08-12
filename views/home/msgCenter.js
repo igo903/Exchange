@@ -15,6 +15,9 @@ import {
 } from 'react-native';
 
 
+var css = require('./../styles/commonCss');
+var NavTpl = require('./../navTopBar');
+
 class MsgCenter extends React.Component{
 	constructor(props){
 		super(props);

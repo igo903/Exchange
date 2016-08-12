@@ -14,9 +14,10 @@ import {
 
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-import ResponsiveImage from 'react-native-responsive-image';
+//import ResponsiveImage from 'react-native-responsive-image';
 
 var css = require('./../styles/commonCss');
+var NavTpl = require('./../navTopBar');
 var funPool = {}
 funPool['msgCenter'] = require('./msgCenter');
 funPool['coinBuy'] = require('./coinBuy');
@@ -34,27 +35,23 @@ class HomeMain extends React.Component{
 	    };
 	}
 
-	iconPortGoTo(funcCode,funcName){
-        this.props.navigator.push({
-          component:funPool[funcCode],
-          title:funcName
-        })
-	}
 
-
-	_navigate(code,name) {
+	goFunc(funcCode,funcName){
 		this.props.navigator.push({
-			passProps: {
-				name: name
-			},
-			type:'FloatFromBottom'
+			component:funPool[funcCode],
+			title:funcName
 		})
 	}
 
+
+
+
 	render(){
 		return (
-			<ScrollView style={[css.appBg, css.headerMarginTop]}>
+			<View style={css.flex}>
+			<NavTpl title = {'SSgA'}></NavTpl>
 
+			<ScrollView style={[css.appBg]}>
 			<View >
 				<Swiper height={180} showsButtons={false} autoplay = {true}>
 					<View style={css.flex}>
@@ -77,28 +74,28 @@ class HomeMain extends React.Component{
 
 				<View style={[css.row,css.iconPortArea]}>
 					<View style={css.center}>
-						<TouchableOpacity onPress={() => this._navigate('msgCenter','消息中心')}>
+						<TouchableOpacity onPress={ this.goFunc.bind(this,"msgCenter","消息中心")}>
 							<Image source = {require("image!msg_icon")} style={css.iconPort}></Image>
 						</TouchableOpacity>
 						<Text style={css.portTxt}>消息中心</Text>
 					</View>
 
 					<View style={css.center}>
-						<TouchableOpacity onPress={this.iconPortGoTo.bind(this,"coinBuy","积分买入")}>
+						<TouchableOpacity >
 							<Image source = {require("image!buy_icon")} style={css.iconPort}></Image>
 						</TouchableOpacity>
 						<Text style={css.portTxt} >积分买入</Text>
 					</View>
 
 					<View style={css.center}>
-						<TouchableOpacity onPress={this.iconPortGoTo.bind(this,"coinSell","积分卖出")}>
+						<TouchableOpacity >
   							<Image source = {require("image!sell_icon")} style={css.iconPort}></Image>
 						</TouchableOpacity>
 						<Text style={css.portTxt} >积分卖出</Text>
 					</View>
 
 					<View style={css.center}>
-						<TouchableOpacity onPress={this.iconPortGoTo.bind(this,"transLookup","交易查询")}>
+						<TouchableOpacity >
 							<Image source = {require("image!lookup_icon")} style={css.iconPort}></Image>
 						</TouchableOpacity>
 						<Text style={css.portTxt} >交易查询</Text>
@@ -126,6 +123,7 @@ class HomeMain extends React.Component{
 
       	</View>
 			</ScrollView>
+			</View>
 
 		);
 	}

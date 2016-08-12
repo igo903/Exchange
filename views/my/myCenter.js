@@ -15,6 +15,12 @@ import {
 } from 'react-native';
 
 var css = require('./../styles/commonCss');
+var NavTpl = require('./../navTopBar');
+
+var funPool = {}
+funPool['transLookup'] = require('./../home/transLookup');
+
+
 
 class MyCenter extends React.Component{
 	constructor(props){
@@ -25,25 +31,32 @@ class MyCenter extends React.Component{
 	    };
 	}
 
+	goFunc(funcCode,funcName){
+		this.props.navigator.push({
+			component:funPool[funcCode],
+			title:funcName
+		})
+	}
+
 	render(){
 		return (
-			<View style={[css.appBg,css.flex,css.headerMarginTop]}>
+			<View style={css.flex}>
+			<NavTpl title = {'Alain'}></NavTpl>
+
+			<ScrollView style={[css.appBg]}>
+			<View>
 				<View style={[css.myArea]}>
 
-					<TouchableOpacity
+					<TouchableOpacity onPress={ this.goFunc.bind(this,"transLookup","交易查询")}
 						style={[css.submitBtn]}
 						underlayColor='#fff'>
 						<Text style={[css.submitBtnTxt]}>登录</Text>
 					</TouchableOpacity>
 				</View>
-
-
-
-
-
+			</View>
+			</ScrollView>
 
 			</View>
-
 	    );
 	}
 }

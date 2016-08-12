@@ -13,18 +13,48 @@ var appCSS = StyleSheet.create({
 
     topNavBar:{
         flex:1,
-        height:64,
         backgroundColor:topNavBarBg,
         justifyContent:"center",
         alignItems:"center"
     },
 
-    leftNavButtonText:{
-        color:'#fff'
+
+
+    navLeftBlock:{
+        justifyContent:"flex-end",
+        alignItems:"flex-start",
+        paddingLeft:10
     },
-    rightNavButtonText:{
-        color:'#fff'
+    navRightBlock:{
+        justifyContent:"flex-end",
+        alignItems:"flex-end",
+        paddingRight:10
     },
+    navMainBlock:{
+        justifyContent:"flex-end",
+        alignItems:"center",
+    },
+    navBlockFont:{
+        fontSize:16,
+        color:"#fff"
+    },
+    navMainFont:{
+        fontSize:17,
+        color:"#fff",
+        fontWeight:"bold"
+
+    },
+    navigator:{
+        height:64,
+        paddingTop:20,
+        paddingBottom:10,
+        flexDirection:"row",
+        backgroundColor:topNavBarBg
+    },
+
+
+
+
 
     headerMarginTop:{
         marginTop:44
